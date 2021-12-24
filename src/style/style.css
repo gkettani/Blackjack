@@ -1,0 +1,29 @@
+.game-board {
+    position: relative;
+    border: 2px solid black;
+    width: 1280px;
+    height: 720px;
+    background-image: url("/img/Background.png");
+    background-size: 1280px 720px;
+    margin: 0 auto;
+}
+
+.btn {
+    width: 200px;
+    height: 100px;
+    background-color: #22DDAA;
+}
+
+.btn:hover{
+    background-color: #aaebd9;
+}
+
+.card{
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 400px;
+    left: 300px;
+    background-size: 200px 300px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+}
