@@ -21,6 +21,10 @@
     border: none;
 }
 
+.btn:hover{
+    background-color: #54b499;
+}
+
 #start-btn{
     width: 16.4%;
     left: 41.8%;
@@ -87,11 +91,37 @@
     left: 42.84%;
     bottom: 3.6%;
 }
-
-/* .play-btn {
-    visibility: hidden;
-} */
 /* ----------------------------------------------------------- */
+
+/* Playing buttons ------------------------------------------- */
+.play-btn {
+    position: absolute;
+    width: 8.2%;
+    height: 5.56%;
+    border-radius: 15px;
+    top: 83.34%;
+    font-size: 28px;
+    color: white;
+}
+
+.play-btn:hover{
+    background-color: #54b499;
+}
+
+#stand-btn{
+    left: 68.9%;
+}
+
+#double-btn{
+    left: 78.67%;
+}
+
+#hit-btn{
+    left: 88.44%;
+}
+
+/* ----------------------------------------------------------- */
+
 
 /* points section -------------------------------------------- */
 .points{
@@ -129,6 +159,7 @@
     left: 87.27%;
     background: url('../../img/deck.svg');
     background-size: 100% 100% ;
+    opacity: 0.85;
 }
 /* ----------------------------------------------------- */
 
@@ -154,26 +185,26 @@
     margin-top: -3px;
 }
 #player-coins p{
-    margin-left: 45px;
+    margin-left: 55px;
     margin-top: -35px;
 }
 
 /* ------------------------------------------------- */
 
 
-.visible{
+.invisible{
     visibility: hidden;
 }
 
-.btn:hover{
-    background-color: #54b499;
+.disabled-btn{
+    opacity: 0.8;
+    pointer-events: none;
 }
 
 .card{
     width: 8.83%;
     height: 22.36%;
     position: absolute;
-    top: 400px;
     background-size: 100% 100%;
     border-radius: 13px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
