@@ -3,7 +3,11 @@ export default class Card{
     {
         this.rank = rank;
         this.suit = suit;
-        this.image = "url( /img/cards/" + rank + '_' + suit + ".svg)";
+        this.image = "url( ../../img/cards/" + rank + '_' + suit + ".svg)";
+    }
+
+    print(){
+        console.log(this.rank+ " , "+ this.suit)
     }
 
 }

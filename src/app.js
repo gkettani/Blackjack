@@ -1,33 +1,82 @@
 import Deck from "./modules/deck.js"
-document.addEventListener('DOMContentLoaded', () =>{
+const gameScreen = document.querySelector('.game-board');
+const startBtn = document.querySelector('#start-btn');
+const minusBtn = document.querySelector('#minus-btn');
+const plusBtn = document.querySelector('#plus-btn');
+const betBtn = document.querySelector('#bet-btn');
+const soundBtn = document.querySelector('#sound-btn');
+const screenBtn = document.querySelector('#screen-btn');
+const standBtn = document.querySelector('#stand-btn');
+const hitBtn = document.querySelector('#hit-btn');
+const doubleBtn = document.querySelector('#double-btn');
+const playerCoins = document.querySelector('#player-coins');
+const mainDeck = document.querySelector('#main-deck');
+const betCoins = document.querySelector('#bet-coins');
 
-    const gameScreen = document.querySelector('.game-board');
-    const btn = document.createElement('button');
-    btn.classList.add('btn');
-    btn.innerText = 'Click';
-    gameScreen.appendChild(btn);
-
-
-    function showCard()
-    {
-        deck.shuffle();
-        // let card = deck.cards[0];
-        let img = document.createElement('div');
-        img.classList.add('card');
-        img.style.backgroundImage = "url(./img/card.png)";
-        gameScreen.appendChild(img);
-
-    }
-
-
-    btn.addEventListener('click', showCard);
-    
-
-});
+let offset = 50;
+let num = 0;
+let cardVisual;
 let deck = new Deck();
-console.log(deck.cards[0]);
-console.log('Shuffled :');
 deck.shuffle();
-console.log(deck.cards[0]);
+let cards = [];
+let cardsVisual = []
+
+
+function showCard()
+{
+    let card = deck.cards[cards.length];
+    cards.push(card);
+    cardVisual = document.createElement('div');
+    cardsVisual.push(cardVisual);
+    cardVisual.classList.add('card');
+    cardVisual.style.backgroundImage = card.image;
+    cardVisual.style.left = 50 + 120*cardsVisual.length + 'px';
+    gameScreen.appendChild(cardVisual);
+}
+
+function showItems(){
+    gameScreen.style.backgroundImage = 'url(../img/Background2.png)';
+    minusBtn.classList.remove('visible');
+    plusBtn.classList.remove('visible');
+    betBtn.classList.remove('visible');
+    playerCoins.classList.remove('visible');
+    mainDeck.classList.remove('visible');
+    betCoins.classList.remove('visible');
+    startBtn.classList.add('visible');
+}
+
+function add(){
+    if (num < 950)
+    {
+        num += offset;
+        betCoins.innerHTML = '$ ' + num;
+        betCoins.style.textAlign =  'center';
+    }
+}
+
+function remove(){
+    if(num >= offset)
+    {
+        num-=offset;
+        betCoins.innerHTML = '$ ' + num;
+    }
+}
+
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        gameScreen.requestFullscreen();
+    } 
+    else if (document.exitFullscreen)
+    {
+        document.exitFullscreen();
+    }
+}
+    
+screenBtn.addEventListener('click', toggleFullScreen)
+plusBtn.addEventListener('click', add);
+minusBtn.addEventListener('click', remove);
+startBtn.addEventListener('click', showItems);
+betBtn.addEventListener('click', showCard);
+
 
 

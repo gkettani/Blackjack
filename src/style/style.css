@@ -1,29 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@700&display=swap');
+
 .game-board {
+    /* border: 2px solid black; */
     position: relative;
-    border: 2px solid black;
     width: 1280px;
     height: 720px;
-    background-image: url("/img/Background.png");
-    background-size: 1280px 720px;
+    background-image: url("../../img/Background1.png");
+    background-size: 100% 100%;
     margin: 0 auto;
 }
 
 .btn {
-    width: 200px;
-    height: 100px;
-    background-color: #22DDAA;
+    position: absolute;
+    height: 7.5%;
+    background-color: #839868;
+    color:#3B462D;
+    font-family: 'Solway', serif;
+    font-size: 40px;
+    border-radius: 20px;
+    border: none;
+}
+
+#start-btn{
+    width: 16.4%;
+    left: 41.8%;
+    top: 43%;
+}
+
+/* control buttons (settings + betting)------------------- */
+.control-btn {
+    width: 3.125%;
+    height: 5.55%;
+    border-radius: 15px;
+    font-size: 30px;
+    color: #FFF;
+    background-color: rgba(131, 152, 104, 0.7);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.control-btn img{
+    display: block;
+    margin: auto;
+}
+
+#sound-btn {
+    left: 91.2%;
+    top: 2.64%;
+}
+
+#screen-btn {
+    right: 1.56%;
+    top: 2.64%;
+}
+
+/* bet control panel --------------------------------------- */
+
+#bet-btn {
+    /* visibility: hidden; */
+    width: 15.4%;
+    left: 42.57%;
+    bottom: 15.83%;
+}
+
+#plus-btn{
+    left: 54.84%;
+    bottom: 3.6%;
+}
+
+#bet-coins{
+    position: absolute;
+    left: 46.33%;
+    bottom: 4.1%;
+    font-family: 'Solway', serif;
+    font-size: 33px;
+    color: #E1EAD5;
+    width: 7.8%;   
+}
+
+#bet-coins p{
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+#minus-btn{
+    left: 42.84%;
+    bottom: 3.6%;
+}
+
+/* .play-btn {
+    visibility: hidden;
+} */
+/* ----------------------------------------------------------- */
+
+/* points section -------------------------------------------- */
+.points{
+    position: absolute;
+    left: 27.97%;
+    width: 4.69%;
+    height: 8.33%;
+    border-radius: 15px;
+    background-color: #A6B98E;
+    color: #e8eee1;
+    font-family: 'Solway', serif;
+    font-size: 35px;
+    text-align: center;
+}
+
+.points p{
+    margin: 10px;
+}
+
+#player-points{
+    top: 62.5%;
+}
+
+#dealer-points{
+    top: 19%;
+}
+/* ------------------------------------------------------ */
+
+/* main deck--------------------------------------------- */
+#main-deck{
+    width: 9.38%;
+    height: 27.1%;
+    position: absolute;
+    top: 35%;
+    left: 87.27%;
+    background: url('../../img/deck.svg');
+    background-size: 100% 100% ;
+}
+/* ----------------------------------------------------- */
+
+/* Coins section ----------------------------------------*/
+#player-coins{
+    position: absolute;
+    left: 3.9%;
+    top: 3.8%;
+    width: 171px;
+    height: 37.5px;
+    background-color: rgba(166, 185, 142, 0.8);
+    border-radius: 30px;
+    font-size: 25px;
+    font-family: 'Solway', serif;
+    color: #3B462D;
+}
+
+#coin-icon{
+    width: 43px;
+    height: 43px;
+    background: url('../../img/money.svg');
+    background-size: 43px 43px;
+    margin-top: -3px;
+}
+#player-coins p{
+    margin-left: 45px;
+    margin-top: -35px;
+}
+
+/* ------------------------------------------------- */
+
+
+.visible{
+    visibility: hidden;
 }
 
 .btn:hover{
-    background-color: #aaebd9;
+    background-color: #54b499;
 }
 
 .card{
-    width: 200px;
-    height: 300px;
+    width: 8.83%;
+    height: 22.36%;
     position: absolute;
     top: 400px;
-    left: 300px;
-    background-size: 200px 300px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    background-size: 100% 100%;
+    border-radius: 13px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card:hover{
+    transform: scale(1.1);
+}
+
+.disabled-btn{
+    opacity: 0.6;
 }
