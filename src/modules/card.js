@@ -16,8 +16,8 @@ export default class Card{
     }
 
     setPosition(xPos, yPos){
-        this.visual.style.left = xPos + 'px';
-        this.visual.style.top = yPos + 'px';
+        this.visual.style.left = xPos + '%';
+        this.visual.style.top = yPos + '%';
     }
 
     appendCard(parent){

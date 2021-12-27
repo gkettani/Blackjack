@@ -1,25 +1,7 @@
 import Dealer from "./modules/dealer.js";
 import Deck from "./modules/deck.js";
+import ElementHandler from "./modules/elementHandler.js";
 import Player from "./modules/player.js";
-
-const gameScreen = document.querySelector('.game-board');
-const startBtn = document.querySelector('#start-btn');
-const minusBtn = document.querySelector('#minus-btn');
-const plusBtn = document.querySelector('#plus-btn');
-const betBtn = document.querySelector('#bet-btn');
-const soundBtn = document.querySelector('#sound-btn');
-const screenBtn = document.querySelector('#screen-btn');
-const standBtn = document.querySelector('#stand-btn');
-const hitBtn = document.querySelector('#hit-btn');
-const doubleBtn = document.querySelector('#double-btn');
-const coinsDiv = document.querySelector('#player-coins');
-const playerCoins = document.querySelector('#money');
-const mainDeck = document.querySelector('#main-deck');
-const betCoins = document.querySelector('#bet-coins');
-const playerPoints = document.querySelector('#player-points');
-const playerPointsValue = Array.from(playerPoints.children);
-const dealerPoints = document.querySelector('#dealer-points');
-const dealerPointsValue = Array.from(dealerPoints.children);
 
 let isFinished = true;
 let offset = 50;
@@ -28,6 +10,8 @@ let counter = 0;
 let deck = new Deck();
 let player = new Player();
 let dealer = new Dealer();
+let elements = new ElementHandler();
+const gameScreen = elements.gameScreen;
 let playTimerId;
 let winnerTimer;
 
@@ -35,8 +19,7 @@ function add(){
     if (betValue < 950 && isFinished && betValue+offset <= player.coins)
     {
         betValue += offset;
-        betCoins.innerText = '$ ' + betValue;
-        betCoins.style.textAlign =  'center';
+        elements.setBetValue(betValue);
     }
 }
 
@@ -44,41 +27,12 @@ function substract(){
     if(betValue >= offset && isFinished)
     {
         betValue-=offset;
-        betCoins.innerText = '$ ' + betValue;
+        elements.setBetValue(betValue);
     }
 }
 
 function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-        gameScreen.requestFullscreen();
-    } 
-    else if (document.exitFullscreen)
-    {
-        document.exitFullscreen();
-    }
-}
-
-function toggleBetScreen(){
-    hitBtn.classList.add('invisible');
-    doubleBtn.classList.add('invisible');
-    standBtn.classList.add('invisible');
-    betBtn.classList.remove('invisible');
-    plusBtn.classList.remove('disabled-btn');
-    minusBtn.classList.remove('disabled-btn');
-    playerPoints.classList.add('invisible');
-    dealerPoints.classList.add('invisible');
-    betCoins.innerText = '$ 0';
-}
-
-function togglePlayScreen(){
-    betBtn.classList.add('invisible');
-    playerPoints.classList.remove('invisible');
-    dealerPoints.classList.remove('invisible');
-    plusBtn.classList.add('disabled-btn');
-    minusBtn.classList.add('disabled-btn');
-    hitBtn.classList.remove('invisible');
-    doubleBtn.classList.remove('invisible');
-    standBtn.classList.remove('invisible');
+    elements.toggleFullScreen();
 }
 
 function distributeCards(){
@@ -89,33 +43,32 @@ function distributeCards(){
     counter++;
     player.cards.push(deck.cards[counter]);
     counter++;
-    betBtn.classList.add('invisible');
+    elements.setInvisisble(elements.betBtn);
 }
 
 function appendCards(){
     player.cards.forEach( card => {
-        card.appendCard(gameScreen);
+        card.appendCard(gameScreen); 
     });
     dealer.cards.forEach( card  => {
-        card.appendCard(gameScreen);
+        card.appendCard(gameScreen);  
     });
 }
 
 function updateScreen(){
     player.cards.forEach( (card, index) => {
-        card.setPosition(500 +index*120, 400);
+        card.setPosition((583 + 60*( 1 + 2*index - player.cards.length))*100/1280, 60.97);
     });
     dealer.cards.forEach( (card, index) => {
-        card.setPosition(500 +index*120, 200);
+        card.setPosition((583 + 60*( 1 + 2*index - dealer.cards.length))*100/1280, 4.45);
     });
 }
 
 function updatePoints(){
     player.updatePoints();
-    playerPointsValue[0].innerText = player.points;
+    elements.setPlayerPoints(player.points);
     dealer.updatePoints();
-    dealerPointsValue[0].innerText = dealer.points;
-    
+    elements.setDealerPoints(dealer.points);
 }
 
 function playerDrawCard(){
@@ -139,8 +92,8 @@ function startGame(){
     {
         isFinished = false;
         player.coins -= betValue;
-        playerCoins.innerText = '$ ' + player.coins;
-        togglePlayScreen(); 
+        elements.setPlayerCoins(player.coins);
+        elements.togglePlayScreen(); 
         distributeCards();
         appendCards();
         updatePoints();
@@ -160,40 +113,41 @@ function stand(){
             checkWinner();
         }
     }, 1000);
+    
 }
 
 function checkWinner(){
     winnerTimer = setInterval(() => {
-    if(player.points <= 21 && (player.points > dealer.points || dealer.points > 21))
-    {
-        player.coins += 2*betValue;
-        playerCoins.innerText = '$ ' + player.coins;
-    }
-    else if(player.points <= 21 && player.points == dealer.points)
-    {
-        player.coins += betValue;
-        playerCoins.innerText = '$ ' + player.coins;
-    }
-    resetGame();
-    clearInterval(winnerTimer);
+        if(player.points <= 21 && (player.points > dealer.points || dealer.points > 21))
+        {
+            player.coins += 2*betValue;
+            elements.displayWinStatus('Victory');
+        }
+        else if(player.points <= 21 && player.points == dealer.points)
+        {
+            player.coins += betValue;
+            elements.displayWinStatus('Tie');
+        }
+        else{
+            elements.displayWinStatus('Defeat');
+        }
+        elements.setPlayerCoins(player.coins);
+        clearInterval(winnerTimer);
+        let id = setInterval(() => {
+            clearInterval(id);
+            resetGame();
+        }, 2000);
     }, 1500);
     
 }
 
 function launchGame(){
-    gameScreen.style.backgroundImage = 'url(../img/Background2.png)';
-    minusBtn.classList.remove('invisible');
-    plusBtn.classList.remove('invisible');
-    betBtn.classList.remove('invisible');
-    coinsDiv.classList.remove('invisible');
-    mainDeck.classList.remove('invisible');
-    betCoins.classList.remove('invisible');
-    startBtn.classList.add('invisible');
+    elements.init();
     player.coins = 500;
-    playerCoins.innerText = '$ ' + player.coins;
 }
 
 function resetGame(){
+    elements.setInvisisble(elements.endDiv);
     player.cards.forEach(card => {
         card.removeVisual(gameScreen);
     });
@@ -204,21 +158,17 @@ function resetGame(){
     dealer.cards = [];
     betValue = 0;
     counter = 0;
-    toggleBetScreen();
+    elements.toggleBetScreen();
 }
 
-function debug(){
-    console.log("");
-}
- 
-screenBtn.addEventListener('click', toggleFullScreen)
-soundBtn.addEventListener('click', debug)
-plusBtn.addEventListener('click', add);
-minusBtn.addEventListener('click', substract);
-startBtn.addEventListener('click', launchGame);
-betBtn.addEventListener('click', startGame);
-standBtn.addEventListener('click', stand);
-hitBtn.addEventListener('click', playerDrawCard);
+elements.screenBtn.addEventListener('click', toggleFullScreen);
+// soundBtn.addEventListener('click', debug)
+elements.plusBtn.addEventListener('click', add);
+elements.minusBtn.addEventListener('click', substract);
+elements.startBtn.addEventListener('click', launchGame);
+elements.betBtn.addEventListener('click', startGame);
+elements.standBtn.addEventListener('click', stand);
+elements.hitBtn.addEventListener('click', playerDrawCard);
 
 
 
