@@ -13,7 +13,6 @@ let dealer = new Dealer();
 let elements = new ElementHandler();
 const gameScreen = elements.gameScreen;
 let playTimerId;
-let winnerTimer;
 
 function add(){
     if (betValue < 950 && isFinished && betValue+offset <= player.coins)
@@ -112,33 +111,29 @@ function stand(){
             clearInterval(playTimerId);
             checkWinner();
         }
-    }, 1000);
+    }, 500);
     
 }
 
 function checkWinner(){
-    winnerTimer = setInterval(() => {
-        if(player.points <= 21 && (player.points > dealer.points || dealer.points > 21))
-        {
-            player.coins += 2*betValue;
-            elements.displayWinStatus('Victory');
-        }
-        else if(player.points <= 21 && player.points == dealer.points)
-        {
-            player.coins += betValue;
-            elements.displayWinStatus('Tie');
-        }
-        else{
-            elements.displayWinStatus('Defeat');
-        }
-        elements.setPlayerCoins(player.coins);
-        clearInterval(winnerTimer);
-        let id = setInterval(() => {
-            clearInterval(id);
-            resetGame();
-        }, 2000);
-    }, 1500);
-    
+    if(player.points <= 21 && (player.points > dealer.points || dealer.points > 21))
+    {
+        player.coins += 2*betValue;
+        elements.displayWinStatus('Victory');
+    }
+    else if(player.points <= 21 && player.points == dealer.points)
+    {
+        player.coins += betValue;
+        elements.displayWinStatus('Tie');
+    }
+    else{
+        elements.displayWinStatus('Defeat');
+    }
+    elements.setPlayerCoins(player.coins);
+    let id = setInterval(() => {
+        clearInterval(id);
+        resetGame();
+    }, 2000);
 }
 
 function launchGame(){

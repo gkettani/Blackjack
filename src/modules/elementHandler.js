@@ -86,7 +86,7 @@ export default class elementHandler{
     }
 
     setPlayerCoins(value){
-        this.playerCoins.innerText = value;
+        this.playerCoins.innerText = '$ ' + value;
     }
 
     setDealerPoints(value){

@@ -126,7 +126,7 @@
 /* points section -------------------------------------------- */
 .points{
     position: absolute;
-    left: 27.97%;
+    left: 25.97%;
     width: 4.69%;
     height: 8.33%;
     border-radius: 15px;
@@ -205,8 +205,10 @@
 }
 
 .card{
-    width: 113px;
-    height: 161px;
+    /* width: 113px;
+    height: 161px; */
+    width: 8.83%;
+    height: 22.36%;
     position: absolute;
     background-size: 100% 100%;
     border-radius: 13px;
