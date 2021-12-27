@@ -7,6 +7,7 @@ export default class elementHandler{
         this.plusBtn = document.querySelector('#plus-btn');
         this.betBtn = document.querySelector('#bet-btn');
         this.soundBtn = document.querySelector('#sound-btn');
+        this.soundIcon = Array.from(this.soundBtn.children);
         this.screenBtn = document.querySelector('#screen-btn');
         this.standBtn = document.querySelector('#stand-btn');
         this.hitBtn = document.querySelector('#hit-btn');
@@ -105,6 +106,11 @@ export default class elementHandler{
     displayWinStatus(status){
         this.setVisisble(this.endDiv);
         this.endText[0].innerText = status;
+    }
+
+    changeSoundIcon(soundOn){
+        if (soundOn) this.soundIcon[0].src = '../img/sound.svg';
+        else this.soundIcon[0].src = '../img/soundOff.png';
     }
 
 }

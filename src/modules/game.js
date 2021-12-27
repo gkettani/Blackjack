@@ -22,6 +22,7 @@ export default class game{
         this.counter = 0;
         this.betValue = 0;
         this.updatePoints();
+        if( this.player.coins === 0) this.player.coins = 500;
     }
 
     distributeCards(){
@@ -97,25 +98,32 @@ export default class game{
         });
     }
 
-    updateScreen(){
-        this.player.cards.forEach( (card, index) => {
+    updateScreen(dt, player){
+        player.cards.forEach( (card, index) => {
             card.setPosition(
-                (583 - 50*( 1 + 2*index - this.player.cards.length))*100/1280,
-                 60.97);
-        });
-        this.dealer.cards.forEach( (card, index) => {
-            card.setPosition(
-                (583 - 50*( 1 + 2*index - this.dealer.cards.length))*100/1280,
-                 4.45);
+                (dt - 50*( 1 + 2*index - player.cards.length))*100/1280,
+                player.cardTop);
         });
     }
 
-    update(elements){
+    update(elements, player){
         this.updatePoints();
         this.appendCards();
-        this.updateScreen();
+        let dt = 550;
+        let timer = setInterval(() => {
+            dt+=5;
+            this.updateScreen(dt, player);
+            if (dt >= 583) clearInterval(timer);
+        }, 40);
         elements.setPlayerPoints(this.player.points);
         elements.setDealerPoints(this.dealer.points);
     }
 
+    double(){
+        if( this.player.coins >= this.betValue){
+            this.player.coins -= this.betValue;
+            this.betValue *= 2;
+            return true;
+        }
+    }
 }

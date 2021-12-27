@@ -4,6 +4,7 @@ export default class deck {
     constructor()
     {
         this.cards = [];
+        this.backCard = new Card(0, 'back');
         for(let i=1; i<14; i++)
         {
             this.cards.push(new Card(i, "spade"));
