@@ -53,6 +53,9 @@ export default class elementHandler{
     }
 
     togglePlayScreen(){
+        this.standBtn.classList.remove('disabled-btn');
+        this.doubleBtn.classList.remove('disabled-btn');
+        this.hitBtn.classList.remove('disabled-btn');
         this.betBtn.classList.add('invisible');
         this.playerPoints.classList.remove('invisible');
         this.dealerPoints.classList.remove('invisible');
@@ -71,6 +74,12 @@ export default class elementHandler{
         {
             document.exitFullscreen();
         }
+    }
+
+    disablePlayBtn(){
+        this.standBtn.classList.add('disabled-btn');
+        this.doubleBtn.classList.add('disabled-btn');
+        this.hitBtn.classList.add('disabled-btn');
     }
 
     setVisisble(element){
