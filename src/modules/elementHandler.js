@@ -1,4 +1,5 @@
 export default class elementHandler{
+    /* This class handles all the visual elements of the index.html file */
 
     constructor(){
         this.gameScreen = document.querySelector('.game-board');

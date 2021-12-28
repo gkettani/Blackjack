@@ -3,8 +3,8 @@ export default class Dealer{
     {
         this.points = 0;
         this.cards = [];
-        this.aceNum = 0;
-        this.cardTop = 4.45;
+        this.aceNum = 0; // The number of aces the dealer has (aces are valued either 1 or 11)
+        this.cardTop = 4.45; // Set the top edge of the positioned card 4.45% down 
     }
 
     updatePoints(){

@@ -9,11 +9,11 @@ export default class game{
         this.player = new Player();
         this.dealer = new Dealer();
         this.deck = new Deck();
-        this.counter = 0;
-        this.isFinished = true;
-        this.betValue = 0;
-        this.gameScreen = gameScreen;
-        this.offset = 50;
+        this.counter = 0; // the number of cards than has been distributed
+        this.isFinished = true; // whether the game is finished or not
+        this.betValue = 0; 
+        this.gameScreen = gameScreen; // The main screen on which visual elements are displayed
+        this.offset = 50; // The increment of betValue
     }
 
     init(){
@@ -81,6 +81,7 @@ export default class game{
     }
 
     removeCards(){
+        /* removes the displayed cards from the screen */
         this.player.cards.forEach(card => {
             card.removeVisual(this.gameScreen);
         });
@@ -90,6 +91,7 @@ export default class game{
     }
 
     appendCards(){
+        /* add the cards to the screen */
         this.player.cards.forEach( card => {
             card.appendCard(this.gameScreen); 
         });
@@ -99,6 +101,9 @@ export default class game{
     }
 
     updateScreen(dt, player){
+        /* Set the position of the cards 
+        @param dt is for the animation effect
+        @param player tells whether we update the player's or dealer's cards */
         player.cards.forEach( (card, index) => {
             card.setPosition(
                 (dt - 50*( 1 + 2*index - player.cards.length))*100/1280,
@@ -114,12 +119,15 @@ export default class game{
             dt+=5;
             this.updateScreen(dt, player);
             if (dt >= 583) clearInterval(timer);
-        }, 40);
+        }, 70);
         elements.setPlayerPoints(this.player.points);
         elements.setDealerPoints(this.dealer.points);
     }
 
     double(){
+        /* This method is called when the player want 
+        to double his initial bet 
+        @return whether the player can double or not*/
         if( this.player.coins >= this.betValue){
             this.player.coins -= this.betValue;
             this.betValue *= 2;

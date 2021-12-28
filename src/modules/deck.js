@@ -1,6 +1,7 @@
 import Card from "./card.js";
 
 export default class deck {
+    // this class creates a deck of 52 cards
     constructor()
     {
         this.cards = [];
@@ -14,8 +15,7 @@ export default class deck {
         }
     }
 
-    shuffle()
-    {
+    shuffle(){
         for(let i=0; i<52; i++)
         {
             let num = Math.floor(Math.random()*52);
