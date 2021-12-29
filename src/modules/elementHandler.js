@@ -44,7 +44,6 @@ export default class elementHandler{
 
     setBetValue(value){
         this.betCoins.innerText = '$ ' + value; 
-        this.betCoins.style.textAlign =  'center';
     }
 
     toggleBetScreen(){

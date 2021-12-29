@@ -9,20 +9,16 @@
     <body>
         <div class="game-board">
             <button id='start-btn' class="btn"> start </button>
-            <button id='plus-btn' class="control-btn btn invisible"> + </button>
-            <button id='minus-btn' class="control-btn btn invisible"> - </button>
             <button id='sound-btn' class='control-btn btn'> <img src='../img/sound.svg' width="30px" height="30px"> </button>
             <button id='screen-btn' class='control-btn btn'> <img src='../img/full-screen.svg' width="30px" height="30px"> </button>
             <button id='stand-btn' class='play-btn btn invisible'> Stand</button>
             <button id='double-btn' class='play-btn btn invisible'> Double </button>
             <button id='hit-btn' class='play-btn btn invisible'> Hit </button>
-            <button id='bet-btn' class='btn invisible'> Bet </button>
             <div id='main-deck' class='invisible'></div>
             <div id="player-coins" class='invisible'>
                 <div id='coin-icon'></div>
                 <p id='money'></p>
             </div>
-            <div id="bet-coins" class='invisible'> <p>$ 0</p> </div>
             <div id="player-points" class="points invisible"> 
                 <p ></p>
             </div>
@@ -31,6 +27,12 @@
             </div>
             <div id = 'end-game' class="invisible">
                 <p> </p>
+            </div>
+            <button id='bet-btn' class='btn invisible'> Bet </button>
+            <div class='bet'>
+                <button id='minus-btn' class="control-btn btn invisible"> - </button>
+                <div id="bet-coins" class='invisible'>$ 0</div>
+                <button id='plus-btn' class="control-btn btn invisible"> + </button>
             </div>
         </div>
     </body>
