@@ -23,6 +23,11 @@ export default class elementHandler{
         this.dealerPointsValue = Array.from(this.dealerPoints.children);
         this.endDiv = document.querySelector('#end-game');
         this.endText = Array.from(this.endDiv.children);
+        this.currencyFormatter = new Intl.NumberFormat("en-us", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+        });
     }
 
     init(){
@@ -34,7 +39,7 @@ export default class elementHandler{
         this.mainDeck.classList.remove('invisible');
         this.betCoins.classList.remove('invisible');
         this.startBtn.classList.add('invisible');
-        this.playerCoins.innerText = '$ 500' ;
+        this.playerCoins.innerText = this.currencyFormatter.format( 500);
     }
 
     setBetValue(value){
@@ -51,7 +56,7 @@ export default class elementHandler{
         this.minusBtn.classList.remove('disabled-btn');
         this.playerPoints.classList.add('invisible');
         this.dealerPoints.classList.add('invisible');
-        this.betCoins.innerText = '$ 0';
+        this.betCoins.innerText = this.currencyFormatter.format(0);
     }
 
     togglePlayScreen(){
@@ -97,7 +102,7 @@ export default class elementHandler{
     }
 
     setPlayerCoins(value){
-        this.playerCoins.innerText = '$ ' + value;
+        this.playerCoins.innerText = this.currencyFormatter.format( value);
     }
 
     setDealerPoints(value){
