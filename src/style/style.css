@@ -60,7 +60,6 @@
 /* bet control panel --------------------------------------- */
 
 #bet-btn {
-    /* visibility: hidden; */
     width: 15.4%;
     left: 42.57%;
     bottom: 15.83%;
@@ -79,6 +78,9 @@
     font-size: 33px;
     color: #E1EAD5;
     width: 7.8%;   
+}
+.game-board:fullscreen #bet-coins{
+    font-size: 2vw;
 }
 
 #bet-coins p{
@@ -102,6 +104,10 @@
     top: 83.34%;
     font-size: 28px;
     color: white;
+}
+
+.game-board:fullscreen .play-btn{
+    font-size: 2vw;
 }
 
 .play-btn:hover{
@@ -140,6 +146,10 @@
     align-items: center;
 }
 
+.game-board:fullscreen .points p{
+    font-size: 2.8vw;
+}
+
 #player-points{
     top: 62.5%;
 }
@@ -175,21 +185,20 @@
     font-family: 'Solway', serif;
     color: #3B462D;
     display: flex;
-    justify-content: right;
+    justify-content: left;
     align-items: center;
 }
 
 #coin-icon{
-    position: absolute;
     width: 25.15%;
     height: 114.67%;
     background: url('../../img/money.svg');
     background-size: 100% 100%;
-    top: -3px;
-    left: 0;
+    margin-right: 13%;
 }
-#player-coins p{
-    margin-right: 20%;
+
+.game-board:fullscreen #player-coins p{
+    font-size: 2vw;
 }
 
 /* ------------------------------------------------- */
