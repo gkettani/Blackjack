@@ -14,6 +14,7 @@ export default class game{
         this.betValue = 0; 
         this.gameScreen = gameScreen; // The main screen on which visual elements are displayed
         this.offset = 50; // The increment of betValue
+        this.hasDoubled = false; //tells whether the player has doubled his bet or not
     }
 
     init(){
@@ -21,6 +22,7 @@ export default class game{
         this.dealer.cards = [];
         this.counter = 0;
         this.betValue = 0;
+        this.hasDoubled = false;
         this.updatePoints();
         if( this.player.coins === 0) this.player.coins = 500;
     }
@@ -55,8 +57,7 @@ export default class game{
     }
 
     setBetValue(value){
-        if( value >= 0 && value < 1000 
-        && this.isFinished && value <= this.player.coins)
+        if( value >= 0 && this.isFinished && value <= this.player.coins)
         {
             this.betValue = value;
         }
@@ -131,7 +132,8 @@ export default class game{
         if( this.player.coins >= this.betValue){
             this.player.coins -= this.betValue;
             this.betValue *= 2;
-            return true;
+            this.hasDoubled = true;
         }
+        return this.hasDoubled;
     }
 }

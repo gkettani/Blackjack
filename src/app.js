@@ -7,7 +7,6 @@ let game = new Game(elements.gameScreen);
 let soundOn = true;
 let bgMusic = new SoundEffect('../audio/bm.mp3');
 let cardSoundEffect = new SoundEffect('../audio/cardFlip.mp3');
-let hasDoubled = false; //Tells whether the player has doubled his bet or not
 
 function playerDrawCard(){ 
     /* when a player withdraw a card we add it to his cards array and
@@ -16,7 +15,7 @@ function playerDrawCard(){
     game.update(elements, game.player);
     cardSoundEffect.play();
     if(game.player.points > 21 ) checkWinner();
-    if (game.player.points == 21 || hasDoubled) stand();
+    else if (game.player.points == 21 || game.hasDoubled) stand();
 }
 
 function dealerDrawCard(){ 
@@ -31,7 +30,6 @@ function startGame(){
     /*Main function that start a new game */
     game.start();
     if( !game.isFinished){
-        hasDoubled = false;
         elements.setPlayerCoins(game.player.coins);
         elements.togglePlayScreen();
         game.update(elements, game.player);
@@ -91,7 +89,6 @@ elements.soundBtn.addEventListener('click', () => {
 });
 elements.doubleBtn.addEventListener('click', () => {
     if( game.double()){
-        hasDoubled = true;
         playerDrawCard();
     }
 });
